@@ -3,7 +3,6 @@ namespace LAB2CS_red
 {
     public class ArrList : BaseList
     {
-        int cnt = 0; // pos < cnt if cnt != 0
         int[] buf;
         int size = 1;
 
@@ -20,23 +19,23 @@ namespace LAB2CS_red
 
         public override void Add(int val)
         {
-            if (cnt >= size) { Expd(); }
-            buf[cnt] = val;
-            cnt++;
+            if (count >= size) { Expd(); }
+            buf[count] = val;
+            count++;
 
         }
         public override void Insert(int val, int pos)
         {
-            if (pos == cnt && pos == 0) Add(val);
+            if (pos == count && pos == 0) Add(val);
 
-            else if (pos == cnt) Add(val);
+            else if (pos == count) Add(val);
 
-            else if (pos < cnt)
+            else if (pos < count)
             {
-                cnt++;
-                if (cnt >= size) Expd();
+                count++;
+                if (count >= size) Expd();
 
-                for (int i = cnt - 1; i != pos; i--)
+                for (int i = count - 1; i != pos; i--)
                 {
                     buf[i] = buf[i - 1];
                 }
@@ -45,64 +44,63 @@ namespace LAB2CS_red
         }
         public override void Delete(int pos)
         {
-            if (pos < cnt)
+            if (pos < count)
             {
-                for (int i = pos; i < cnt - 1; i++)
+                for (int i = pos; i < count - 1; i++)
                 {
                     buf[i] = buf[i + 1];
                 }
-                cnt--;
+                count--;
             }
 
-            else if (pos == cnt - 1 && cnt > 0)
+            else if (pos == count - 1 && count > 0)
             {
                 buf[pos] = 0;
-                cnt--;
+                count--;
             }
         }
 
         public override void Clear()
         {
-            for (int i = 0; i < cnt; i++)
+            for (int i = 0; i < count; i++)
             {
                 buf[i] = 0;
             }
-            cnt = 0;
-        }
-
-        public int Count
-        {
-            get { return cnt; }
+            count = 0;
         }
 
         public override int this[int i]
         {
             get
             {
-                if (i >= cnt || i < 0) return 0;
+                if (i >= count || i < 0) return 0;
 
                 return buf[i];
             }
 
             set
             {
-                if (i >= cnt || i < 0) return;
+                if (i >= count || i < 0) return;
 
                 buf[i] = value;
             }
         }
 
-        public void Show()
+        public override void Show()
         {
-            if (cnt >= 0)
+            if (count >= 0)
             {
-                for (int i = 0; i < cnt; i++)
+                for (int i = 0; i < count; i++)
                 {
-                    if (i == cnt - 1) Console.Write($"{buf[i]}. ");
+                    if (i == count - 1) Console.Write($"{buf[i]}. ");
                     else Console.Write($"{buf[i]}, ");
                 }
             }
             else Console.WriteLine("Нет элементов в array листе");
         }
-    }
+        protected override BaseList Dummy()
+        {
+            return new ArrList();
+        }
+    }       
 }

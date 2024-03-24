@@ -6,10 +6,10 @@ namespace LAB2CS_red
         static void Main(string[] args)
         {
 
-            ArrList abstr = new ArrList();
-            ChainList chain = new ChainList();
+            BaseList abstr = new ArrList();
+            BaseList chain = new ChainList();
 
-            Random rnd = new Random();
+            Random rnd = new();
 
             int iter = 2000;
 
@@ -40,11 +40,11 @@ namespace LAB2CS_red
 
                         break;
 
-                    /*case 3:
+                    /* case 3:
                         //Console.WriteLine("clr");
-                        abstr.Clr();
+                        abstr.Clear();
                         chain.Clear();
-                        break;*/
+                        break; */
 
                     case 4:
 
@@ -54,20 +54,13 @@ namespace LAB2CS_red
                 }
             }
 
-            bool check = false;
+            if (abstr.IsEqual(chain)) Console.WriteLine("Успешно");
 
-            for (int i = 0; i < abstr.Count; i++)
-            {
-                if (abstr[i] != chain[i])
-                {
-                    Console.WriteLine("Элементы не сошлись");
-                    Console.WriteLine($"{abstr[i]}, {chain[i]}, {i}");
-                    check = true;
-                }
-            }
-            if (check == false) Console.WriteLine("Успешно\n");
+            Console.WriteLine($"Arr count = {abstr.Count}, Chain count = {chain.Count}\n");
 
-            Console.WriteLine($"Arr cnt = {abstr.Count}, Chain cnt = {chain.Count}\n");
+            abstr.Assign(chain);
+
+            if (abstr.IsEqual(chain)) Console.WriteLine("Успешно");
 
             abstr.Show();
             Console.WriteLine("\n\n");

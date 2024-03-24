@@ -21,7 +21,6 @@ namespace LAB2CS_red
         }
 
         Node head = null;
-        int count = 0; // pos < cnt if head != null
 
         public Node Find(int posit)
         {
@@ -107,10 +106,6 @@ namespace LAB2CS_red
             head = null;
             count = 0;
         }
-        public int Count
-        {
-            get { return count; }
-        }
 
         public override int this[int i]
         {
@@ -131,7 +126,7 @@ namespace LAB2CS_red
             }
         }
 
-        public void Show()
+        public override void Show()
         {
             Node cur = head;
             if (cur != null)
@@ -144,6 +139,30 @@ namespace LAB2CS_red
                 Console.Write($"{cur.Data}. ");
             }
             else Console.WriteLine("Нет элементов в chain листе");
+        }
+        protected override BaseList Dummy()
+        {
+            return new ChainList();
+        }
+
+        public override void Sort()
+        {
+            if (count == 0 || count == 1) { return; }
+
+            bool swap;
+            do
+            {
+                swap = false;
+                Node curr = head;
+                for (int i = 0; i < count; i++)
+                {
+                    if (curr.Data < curr.Next.Data)
+                    {
+                        (curr.Next.Data, curr.Data) = (curr.Data, curr.Next.Data);
+                        swap = true;
+                    }
+                }
+            } while (swap);
         }
     }
 }
