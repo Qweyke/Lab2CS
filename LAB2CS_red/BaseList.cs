@@ -32,19 +32,19 @@ namespace LAB2CS_red
         {   
             if (this.Count == 0 || this.Count == 1) { return; }
             
-            int pos = 0;
-            while (pos < this.Count)
+            int pstn = 0;
+            while (pstn < this.Count - 1)
             {
-                if (this[pos] >= this[pos + 1])
+                if (this[pstn] >= this[pstn + 1])
                 {
-                    pos++;
+                    pstn++;
                 }
 
                 else
                 {
-                    (this[Count - 1], this[pos]) = (this[pos], this[Count - 1]);
+                    (this[pstn + 1], this[pstn]) = (this[pstn], this[pstn + 1]);
 
-                    if (pos > 0) pos--;
+                    if (pstn > 0) pstn--;
                 }
             }                         
         }

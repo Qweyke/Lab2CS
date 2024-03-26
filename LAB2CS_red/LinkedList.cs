@@ -72,7 +72,7 @@ namespace LAB2CS_red
                 {
                     Node prev = Find(posit - 1);
                     Node curr = Find(posit);
-                    Node insr = new Node(value) { Next = curr };
+                    Node insr = new(value) { Next = curr };
                     prev.Next = insr;
                     count++;
                 }
@@ -154,13 +154,14 @@ namespace LAB2CS_red
             {
                 swap = false;
                 Node curr = head;
-                for (int i = 0; i < count; i++)
+                for (int i = 0; i < count - 1; i++)
                 {
                     if (curr.Data < curr.Next.Data)
                     {
                         (curr.Next.Data, curr.Data) = (curr.Data, curr.Next.Data);
                         swap = true;
                     }
+                    curr = curr.Next;
                 }
             } while (swap);
         }
